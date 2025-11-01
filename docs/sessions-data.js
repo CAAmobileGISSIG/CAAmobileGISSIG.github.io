@@ -3,30 +3,30 @@ const sessionsData = {
     "upcoming": [
         {
             "id": 1,
-            "title": "Hands-on Workshop: Mobile Data Collection",
-            "type": "Workshop",
-            "date": "2025-04-15",
-            "location": "University of Oxford, UK",
-            "lat": 51.7520,
-            "lng": -1.2577,
-            "description": "Practical workshop focusing on efficient workflows for archaeological data collection using mobile applications. Participants will learn best practices for field survey, data quality assurance, and integration with other tools.",
+            "title": "S48: Beyond Empowerment: Measuring the Impact of Mobile GIS in Field Archaeology",
+            "type": "Session",
+            "date": "2026-04-3",
+            "location": "University of Vienna, Austria",
+            "lat": 48.208333,
+            "lng": 16.3725,
+            "description": "Mobile GIS is a GIS for users who are on the move” (Lee 1993). Since its early adoption in archaeology (Pundt 2002; Tripcevich 2004), the technology has been celebrated for empowering archaeologists and communities, enabling efficient mapping and data collection even in underfunded, remote projects. Two decades on, Mobile GIS has become routine in fieldwork. This session asks: what does empowerment actually look like, and how can it be measured? We invite contributions that move beyond anecdote to critically evaluate the utility and durability of Mobile-GIS-based workflows in practice. Evidence-based comparisons—before and after a shift in toolkits, or between “in-the-field” and “in-the-office” workflows—are especially welcome. Evaluations might consider: reduced setup costs and administrative labour; technical debt and technical lock-in; ease of producing FAIR data; robust and low-maintenance data pipelines; improved team participation and community engagement (visible in data reuse, data compatibility with official registers, and other secondary benefits). Legal and regulatory contexts, where digital field records can function as admissible documentation, also form part of this evolving landscape. We also welcome methodological critiques that address the long-term sustainability of Mobile GIS practices. How resilient are current workflows to offline environments, overheated batteries, directorial tinkering, and emergent field realities, including volunteers taking pictures obsessively? What evidence demonstrates the scalability of these systems and their ability to generate rich, interoperable datasets for national and research archives? And as AI tools increasingly enter the discourse, what realistic role—if any—do they play in contexts where field conditions remain largely immune to network-dependent automation? We invite case studies, evaluations, and critiques that help the community take stock of where field data collection is today, and where it is heading.",
             "topics": [
-                "Setting up mobile GIS applications for field work",
-                "Data collection workflows at different scales",
-                "Quality control and validation techniques",
-                "Integration with GNSS and other equipment"
+                "What measurable evidence supports claims of empowerment and utility?",
+                "How sustainable are current Mobile GIS workflows over 5+ years?",
+                "What trade-offs between ease, cost, and data quality emerge in practice?",
+                "Where, if anywhere, does AI meaningfully fit into field data collection today?"
             ],
             "status": "upcoming"
         },
         {
             "id": 2,
-            "title": "Technical Session: Application Testing Results",
-            "type": "Technical Session",
-            "date": "2025-06-20",
+            "title": "S27: Release the Kraken – Mobile GIS empowering survey communities across the globe",
+            "type": "Session",
+            "date": "2025-05-08",
             "location": "Archaeological Institute, Athens, Greece",
             "lat": 37.9838,
             "lng": 23.7275,
-            "description": "Presentation and discussion of results from our ongoing application testing program. Review of newly available mobile GIS tools and their suitability for archaeological fieldwork.",
+            "description": "S27: Release the Kraken – Mobile GIS empowering survey communities across the globe",
             "topics": [
                 "Review of tested mobile GIS applications",
                 "Performance metrics and comparison",
