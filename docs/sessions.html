@@ -6,6 +6,35 @@
     <title>Sessions - Mobile GIS SIG</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c5282;
+        }
+
+        @media (max-width: 768px) {
+            .logo img {
+                height: 40px;
+            }
+            
+            .logo-text {
+                font-size: 1.2em;
+            }
+        }
+
         .session-card {
             background: white;
             border-radius: 8px;
@@ -140,7 +169,10 @@
     <header>
         <nav>
             <div class="container">
-                <h1 class="logo">Mobile GIS SIG</h1>
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="Mobile GIS SIG Logo">
+                    <span class="logo-text">Mobile GIS SIG</span>
+                </a>
                 <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
