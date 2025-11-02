@@ -4,7 +4,7 @@ const sessionsData = {
         {
             "id": 7,
             "title": "S48: Beyond Empowerment: Measuring the Impact of Mobile GIS in Field Archaeology",
-            "type": "Session",
+            "type": "Scientific Session",
             "date": "2026-04-03",
             "location": "CAA 2026 Vienna, Austria",
             "lat": 48.208333,
@@ -24,7 +24,7 @@ const sessionsData = {
         {
             "id": 6,
             "title": "S27: Release the Kraken – Mobile GIS empowering survey communities across the globe",
-            "type": "Session",
+            "type": "Scientific Session",
             "date": "2025-05-08",
             "location": "CAA 2024 Athens, Greece",
             "lat": 37.9838,
@@ -44,7 +44,7 @@ const sessionsData = {
         {
             "id": 5,
             "title": "S06: Stay connected: Developing Mobile GIS for team-based collaboration in archaeological research",
-            "type": "Session",
+            "type": "Scientific Session",
             "date": "2023-04-06",
             "location": "CAA 2023 Amsterdam, Netherlands",
             "lat": 52.372778,
@@ -59,7 +59,7 @@ const sessionsData = {
         {
             "id": 4,
             "title": "From surface distributions to settlement patterns: field survey during COVID-19",
-            "type": "Session",
+            "type": "Scientific Session",
             "date": "2021-06-14",
             "location": "Online",
             "lat": 34.674997,
@@ -76,7 +76,7 @@ const sessionsData = {
         {
             "id": 3,
             "title": "O23: Taking your GIS onto the field. 'How-s and 'Why-s of future survey",
-            "type": "Session",
+            "type": "Scientific Session",
             "date": "2019-04-25",
             "location": "CAA 2019 Kraków, Poland",
             "lat": 	50.061667,
@@ -97,7 +97,7 @@ const sessionsData = {
         {
             "id": 2,
             "title": "S25. Do we have a heading? Ah! A heading. Set sail in a... uh for Mobile GIS direction!",
-            "type": "Session",
+            "type": "Scientific Session",
             "date": "2018-03-21",
             "location": "CAA Conference 2018, Tübingen, Germany",
             "lat": 48.52,
@@ -113,7 +113,7 @@ const sessionsData = {
         {
             "id": 1,
             "title": "Mobile GIS and field survey - current possibilities, future needs",
-            "type": "Session",
+            "type": "Scientific Session",
             "date": "2017-03-16",
             "location": "CAA 2017 Atlanta, USA",
             "lat": 33.748889,
