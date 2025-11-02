@@ -5,6 +5,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sessions - Mobile GIS SIG</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .session-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .session-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .session-card.upcoming {
+            border-left: 4px solid #48bb78;
+        }
+
+        .session-card.past {
+            border-left: 4px solid #718096;
+        }
+
+        .session-header {
+            margin-bottom: 15px;
+        }
+
+        .session-header h3 {
+            color: #2c5282;
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .session-type {
+            display: inline-block;
+            background-color: #e2e8f0;
+            color: #2c5282;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .session-details {
+            color: #4a5568;
+        }
+
+        .session-date, .session-location {
+            margin: 8px 0;
+        }
+
+        .session-description {
+            margin: 15px 0;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .session-topics {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f7fafc;
+            border-radius: 4px;
+        }
+
+        .session-topics strong {
+            color: #2c5282;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .session-topics ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .session-topics li {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+
+        .sessions-section {
+            margin: 40px 0;
+        }
+
+        .sessions-section h2 {
+            color: #2c5282;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .sessions-intro {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .session-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .session-type-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .session-type-card h3 {
+            color: #2c5282;
+            margin-top: 0;
+        }
+
+        .no-sessions {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+            font-style: italic;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -27,87 +157,48 @@
         <section class="page-header">
             <div class="container">
                 <h1>Sessions & Workshops</h1>
-                <p class="subtitle">Hands-on workshops and technical sessions on mobile GIS for archaeology</p>
+                <p class="subtitle">CAA Mobile GIS Special Interest Group sessions on mobile GIS for archaeology</p>
             </div>
         </section>
 
         <section class="content">
             <div class="container">
                 <div class="sessions-intro">
-                    <p>The Mobile GIS SIG organizes various sessions, workshops, and meetings to facilitate knowledge exchange, hands-on training, and discussion among members. Our sessions focus on practical applications, technical testing, and collaborative problem-solving in the field of mobile GIS for archaeology.</p>
+                    <p>The Mobile GIS SIG organizes scientific sessions at CAA conferences to facilitate knowledge exchange, hands-on training, and discussion among members. Our sessions focus on practical applications, methodological developments, and collaborative problem-solving in the field of mobile GIS for archaeology. Since 2017, we have been hosting annual sessions that bring together researchers and practitioners from around the world to share experiences and advance the field.</p>
                 </div>
 
                 <div class="sessions-section">
                     <h2>Upcoming Sessions</h2>
-                    <div class="session-card upcoming">
-                        <div class="session-header">
-                            <h3>S48: Beyond Empowerment: Measuring the Impact of Mobile GIS in Field Archaeology</h3>
-                            <span class="session-type">Scientific Session</span>
-                        </div>
-                        <div class="session-details">
-                            <p class="session-date"><strong>Date:</strong> To be announced</p>
-                            <p class="session-location"><strong>Location:</strong> TBA</p>
-                            <p class="session-description">Practical workshop focusing on efficient workflows for archaeological data collection using mobile applications. Participants will learn best practices for field survey, data quality assurance, and integration with other tools.</p>
-                            <div class="session-topics">
-                                <strong>Topics covered:</strong>
-                                <ul>
-                                    <li>Setting up mobile GIS applications for field work</li>
-                                    <li>Data collection workflows at different scales</li>
-                                    <li>Quality control and validation techniques</li>
-                                    <li>Integration with GNSS and other equipment</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="session-card upcoming">
-                        <div class="session-header">
-                            <h3>Technical Session: Application Testing Results</h3>
-                            <span class="session-type">Technical Session</span>
-                        </div>
-                        <div class="session-details">
-                            <p class="session-date"><strong>Date:</strong> To be announced</p>
-                            <p class="session-location"><strong>Location:</strong> TBA</p>
-                            <p class="session-description">Presentation and discussion of results from our ongoing application testing program. Review of newly available mobile GIS tools and their suitability for archaeological fieldwork.</p>
-                        </div>
-                    </div>
-
-                    <div class="session-card upcoming">
-                        <div class="session-header">
-                            <h3>Discussion Forum: Standards and Guidelines</h3>
-                            <span class="session-type">Discussion</span>
-                        </div>
-                        <div class="session-details">
-                            <p class="session-date"><strong>Date:</strong> To be announced</p>
-                            <p class="session-location"><strong>Location:</strong> TBA</p>
-                            <p class="session-description">Open discussion among international experts to develop standards and guidelines for mobile GIS usage in archaeology. Topics include data security, crowdsourcing quality, and workflow optimization.</p>
-                        </div>
+                    <div id="upcoming-sessions-container">
+                        <div class="loading">Loading sessions...</div>
                     </div>
                 </div>
 
                 <div class="sessions-section">
                     <h2>Past Sessions</h2>
-                    <p class="past-sessions-note">Information about past sessions will be added as the SIG develops its activities. Check back soon for updates on our completed workshops and presentations.</p>
+                    <div id="past-sessions-container">
+                        <div class="loading">Loading sessions...</div>
+                    </div>
                 </div>
 
                 <div class="sessions-section">
-                    <h2>Session Types</h2>
+                    <h2>Session Focus Areas</h2>
                     <div class="session-types-grid">
                         <div class="session-type-card">
-                            <h3>Hands-on Workshops</h3>
-                            <p>Practical training sessions where participants work directly with mobile GIS applications and equipment in simulated or real field conditions.</p>
+                            <h3>Field Methodologies</h3>
+                            <p>Development and evaluation of field survey techniques, data collection workflows, and best practices for mobile GIS in archaeological fieldwork.</p>
                         </div>
                         <div class="session-type-card">
-                            <h3>Technical Sessions</h3>
-                            <p>Presentations and demonstrations of new technologies, research results, and technical developments in mobile GIS for archaeology.</p>
+                            <h3>Technical Innovations</h3>
+                            <p>Exploration of new technologies, GNSS advancements, software developments, and integration of mobile GIS with other tools like drones and sensors.</p>
                         </div>
                         <div class="session-type-card">
-                            <h3>Discussion Forums</h3>
-                            <p>Collaborative meetings focused on developing standards, sharing experiences, and addressing challenges in mobile GIS implementation.</p>
+                            <h3>Data Standards</h3>
+                            <p>Discussion of data quality, FAIR principles, interoperability, and standardization in mobile GIS data collection and management.</p>
                         </div>
                         <div class="session-type-card">
-                            <h3>Field Testing Events</h3>
-                            <p>Real-world testing of mobile applications and workflows in active archaeological field projects.</p>
+                            <h3>Collaborative Research</h3>
+                            <p>Team-based collaboration, community empowerment, citizen science, and the social aspects of mobile GIS in archaeology.</p>
                         </div>
                     </div>
                 </div>
@@ -127,5 +218,79 @@
             <p><a href="contact.html">Contact Us</a></p>
         </div>
     </footer>
+
+    <script src="sessions-data.js"></script>
+    <script>
+        // Function to create session card HTML
+        function createSessionCard(session) {
+            const topicsHTML = session.topics && session.topics.length > 0
+                ? `<div class="session-topics">
+                    <strong>Topics covered:</strong>
+                    <ul>
+                        ${session.topics.map(topic => `<li>${topic}</li>`).join('')}
+                    </ul>
+                   </div>`
+                : '';
+
+            const dateStr = new Date(session.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            return `
+                <div class="session-card ${session.status}">
+                    <div class="session-header">
+                        <h3>${session.title}</h3>
+                        <span class="session-type">${session.type}</span>
+                    </div>
+                    <div class="session-details">
+                        <p class="session-date"><strong>Date:</strong> ${dateStr}</p>
+                        <p class="session-location"><strong>Location:</strong> ${session.location}</p>
+                        <p class="session-description">${session.description}</p>
+                        ${topicsHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to load and display sessions
+        function loadSessions() {
+            try {
+                const upcomingContainer = document.getElementById('upcoming-sessions-container');
+                const pastContainer = document.getElementById('past-sessions-container');
+
+                // Load upcoming sessions
+                if (sessionsData.upcoming && sessionsData.upcoming.length > 0) {
+                    upcomingContainer.innerHTML = sessionsData.upcoming
+                        .map(session => createSessionCard(session))
+                        .join('');
+                } else {
+                    upcomingContainer.innerHTML = '<div class="no-sessions">No upcoming sessions scheduled at this time. Check back soon for updates!</div>';
+                }
+
+                // Load past sessions (sorted by date, most recent first)
+                if (sessionsData.past && sessionsData.past.length > 0) {
+                    const sortedPast = [...sessionsData.past].sort((a, b) => 
+                        new Date(b.date) - new Date(a.date)
+                    );
+                    pastContainer.innerHTML = sortedPast
+                        .map(session => createSessionCard(session))
+                        .join('');
+                } else {
+                    pastContainer.innerHTML = '<div class="no-sessions">No past sessions recorded yet.</div>';
+                }
+            } catch (error) {
+                console.error('Error loading sessions:', error);
+                document.getElementById('upcoming-sessions-container').innerHTML = 
+                    '<div class="no-sessions">Error loading sessions. Please try again later.</div>';
+                document.getElementById('past-sessions-container').innerHTML = 
+                    '<div class="no-sessions">Error loading sessions. Please try again later.</div>';
+            }
+        }
+
+        // Load sessions when page loads
+        document.addEventListener('DOMContentLoaded', loadSessions);
+    </script>
 </body>
 </html>
