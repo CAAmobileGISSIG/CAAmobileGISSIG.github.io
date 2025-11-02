@@ -81,6 +81,7 @@
         .session-popup h3 {
             margin: 0 0 5px 0;
             color: #2c5282;
+            font-size: 1.1em;
         }
 
         .session-popup .session-type {
@@ -107,11 +108,47 @@
         .session-popup .session-description {
             margin: 10px 0;
             line-height: 1.5;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .session-popup .session-topics {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .session-popup .session-topics strong {
+            color: #2c5282;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .session-popup .session-topics ul {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+
+        .session-popup .session-topics li {
+            margin: 3px 0;
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            line-height: 1.6;
         }
 
         @media (max-width: 768px) {
             #map {
                 height: 400px;
+            }
+
+            .map-controls {
+                justify-content: center;
             }
         }
     </style>
@@ -137,19 +174,21 @@
         <section class="page-header">
             <div class="container">
                 <h1>Sessions Map</h1>
-                <p class="subtitle">Explore our workshops, technical sessions, and events across the globe</p>
+                <p class="subtitle">Explore our scientific sessions and events across the globe</p>
             </div>
         </section>
 
         <section class="content">
             <div class="container">
+                <div class="info-box">
+                    <p>This interactive map displays all Mobile GIS SIG sessions organized at CAA conferences since 2017. Click on any marker to view detailed information about the session, including date, location, description, and topics covered. Use the filter buttons below to view specific types of sessions or filter by time period.</p>
+                </div>
+
                 <div class="map-controls">
                     <button class="filter-btn active" data-filter="all">All Sessions</button>
                     <button class="filter-btn" data-filter="upcoming">Upcoming Only</button>
                     <button class="filter-btn" data-filter="past">Past Sessions</button>
-                    <button class="filter-btn" data-filter="Workshop">Workshops</button>
                     <button class="filter-btn" data-filter="Scientific Session">Scientific Sessions</button>
-                    <button class="filter-btn" data-filter="Discussion">Discussions</button>
                 </div>
 
                 <div id="map"></div>
@@ -168,8 +207,8 @@
 
                 <div class="content-block">
                     <h2>About the Sessions Map</h2>
-                    <p>This interactive map displays all Mobile GIS SIG sessions, workshops, and events. Click on any marker to view detailed information about the session, including date, location, and topics covered. Use the filter buttons above to view specific types of sessions or filter by time period.</p>
-                    <p>Our sessions are held at various archaeological institutions and conference venues around the world, fostering international collaboration and knowledge exchange in mobile GIS for archaeology.</p>
+                    <p>Our sessions are held at various CAA conference venues around the world, fostering international collaboration and knowledge exchange in mobile GIS for archaeology. Since our first session in Atlanta (2017), we have organized sessions in major European cities and online, bringing together researchers from diverse archaeological contexts.</p>
+                    <p>Each session focuses on different aspects of mobile GIS, from technical innovations and GNSS technologies to collaborative workflows, data standards, and community empowerment. The sessions have evolved from foundational discussions about mobile GIS possibilities to more specialized topics like measuring impact and addressing sustainability challenges.</p>
                 </div>
 
                 <div class="content-block cta-block">
@@ -201,6 +240,7 @@
 
         // Store all markers for filtering
         let allMarkers = [];
+        let markerCluster = L.layerGroup().addTo(map);
 
         // Function to create marker icon based on session status
         function getMarkerIcon(status) {
@@ -217,20 +257,36 @@
         function createPopupContent(session) {
             let topicsHtml = '';
             if (session.topics && session.topics.length > 0) {
-                topicsHtml = '<ul style="margin: 10px 0; padding-left: 20px;">';
-                session.topics.forEach(topic => {
-                    topicsHtml += `<li>${topic}</li>`;
-                });
-                topicsHtml += '</ul>';
+                topicsHtml = `
+                    <div class="session-topics">
+                        <strong>Topics:</strong>
+                        <ul>
+                            ${session.topics.map(topic => `<li>${topic}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            const dateStr = new Date(session.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Truncate description if too long
+            const maxDescLength = 400;
+            let description = session.description;
+            if (description.length > maxDescLength) {
+                description = description.substring(0, maxDescLength) + '...';
             }
 
             return `
                 <div class="session-popup">
                     <h3>${session.title}</h3>
                     <span class="session-type">${session.type}</span>
-                    <p class="session-date"><strong>Date:</strong> ${new Date(session.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                    <p class="session-date"><strong>Date:</strong> ${dateStr}</p>
                     <p class="session-location"><strong>Location:</strong> ${session.location}</p>
-                    <p class="session-description">${session.description}</p>
+                    <p class="session-description">${description}</p>
                     ${topicsHtml}
                 </div>
             `;
@@ -241,26 +297,36 @@
             sessions.forEach(session => {
                 const marker = L.marker([session.lat, session.lng], {
                     icon: getMarkerIcon(session.status)
-                }).addTo(map);
+                });
 
                 marker.bindPopup(createPopupContent(session), {
-                    maxWidth: 400
+                    maxWidth: 400,
+                    maxHeight: 400
                 });
 
                 // Store marker with session data for filtering
                 marker.sessionData = session;
                 allMarkers.push(marker);
+                markerCluster.addLayer(marker);
             });
         }
 
-        // Add all sessions to map
-        addSessionsToMap(sessionsData.upcoming);
-        addSessionsToMap(sessionsData.past);
+        // Load and display sessions
+        try {
+            if (sessionsData.upcoming && Array.isArray(sessionsData.upcoming)) {
+                addSessionsToMap(sessionsData.upcoming);
+            }
+            if (sessionsData.past && Array.isArray(sessionsData.past)) {
+                addSessionsToMap(sessionsData.past);
+            }
 
-        // Fit map to show all markers
-        if (allMarkers.length > 0) {
-            const group = L.featureGroup(allMarkers);
-            map.fitBounds(group.getBounds().pad(0.1));
+            // Fit map to show all markers
+            if (allMarkers.length > 0) {
+                const group = L.featureGroup(allMarkers);
+                map.fitBounds(group.getBounds().pad(0.1));
+            }
+        } catch (error) {
+            console.error('Error loading sessions:', error);
         }
 
         // Filter functionality
@@ -273,7 +339,10 @@
 
                 const filter = this.dataset.filter;
 
-                // Show/hide markers based on filter
+                // Clear current markers
+                markerCluster.clearLayers();
+
+                // Filter and add markers
                 allMarkers.forEach(marker => {
                     const session = marker.sessionData;
                     let show = true;
@@ -288,11 +357,15 @@
                     }
 
                     if (show) {
-                        marker.addTo(map);
-                    } else {
-                        map.removeLayer(marker);
+                        markerCluster.addLayer(marker);
                     }
                 });
+
+                // Fit map to visible markers
+                if (markerCluster.getLayers().length > 0) {
+                    const group = L.featureGroup(markerCluster.getLayers());
+                    map.fitBounds(group.getBounds().pad(0.1));
+                }
             });
         });
     </script>
